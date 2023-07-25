@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author Leticia Pillar <@leticiapillar>
@@ -26,5 +28,12 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = productRepository.findAll();
         log.debug("Find all products: {}", products);
         return products;
+    }
+
+    @Override
+    public Optional<Product> findById(UUID id) {
+        Optional<Product> product = productRepository.findById(id);
+        log.debug("Find by id is present: {}", product.isPresent());
+        return product;
     }
 }

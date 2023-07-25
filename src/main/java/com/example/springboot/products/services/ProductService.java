@@ -3,6 +3,8 @@ package com.example.springboot.products.services;
 import com.example.springboot.products.domains.Product;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author Leticia Pillar <@leticiapillar>
@@ -11,4 +13,6 @@ import java.util.List;
  */
 public interface ProductService {
     List<Product> findAll();
+
+    Optional<Product> findById(UUID id);
 }

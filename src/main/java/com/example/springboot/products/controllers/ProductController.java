@@ -8,10 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * @author Leticia Pillar <@leticiapillar>
@@ -33,6 +36,15 @@ public class ProductController {
         log.debug("Get all products ...");
         return ResponseEntity.status(HttpStatus.OK)
                 .body(productService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getOne(@PathVariable(value = "id") UUID id) {
+        Optional<Product> product = productService.findById(id);
+        if (product.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(product.get());
     }
 
 }
