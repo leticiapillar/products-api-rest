@@ -5,8 +5,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -19,14 +22,18 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "products")
-@Data
-public class Product {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Product implements Serializable {
+    private static final long serialVersionUID = -295206971694960859L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID uuid;
     private String name;
     private Integer quantity;
-    private BigDecimal value;
+    private BigDecimal price;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
